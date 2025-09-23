@@ -1,17 +1,15 @@
-const cadastroFormulario = document.getElementById('cadastroFormulario');
+const formularioLogin = document.getElementById('formularioLogin');
 const campoUsuario = document.getElementById('campoUsuario');
 const campoSenha = document.getElementById('campoSenha');
-const campoSenhaConfirmar = document.getElementById('campoSenhaConfirmar');
 
 
-cadastroFormulario.addEventListener('submit', (evento) => {
+formularioLogin.addEventListener('submit', (evento) => {
     evento.preventDefault();
     let validado = processoCadastro();
 
     if (validado) 
         {
-            alert('Cadastro realizado com sucesso!');
-            location.href = "paginaLogin.html";
+            window.open('paginaPrincipal.html', '_self')
         }
 })
 
@@ -39,22 +37,12 @@ function processoCadastro()
             teveErro('campoSenhaErro', false);
         }
 
-    if ( campoSenhaConfirmar.value !== campoSenha.value || campoSenhaConfirmar.value === '')
-        {
-            teveErro('campoSenhaConfirmarErro', true);
-            valido = false;
-        }
-    else 
-        {
-            teveErro('campoSenhaConfirmarErro', false);
-        }
-
         return valido;
 }
 
  
-function teveErro(erroId, show) 
+function teveErro(errorId, show) 
 {
-    const errorElement = document.getElementById(erroId);
+    const errorElement = document.getElementById(errorId);
     errorElement.style.display=show ? 'block': 'none';
 }

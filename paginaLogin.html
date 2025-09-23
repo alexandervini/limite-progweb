@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styleLogin.css">
     <title>LOGIN</title>
 </head>
 <body>
     <main class="container">
-        <form>
+        <form id="formularioLogin">
             <h1>Login</h1>
             <div class="input-login">
                 <input type="text" placeholder="Usúario" id="campoUsuario">
+                <div class="error" id="campoUsuarioErro">Usuário ou senha incorreto.</div>
             </div>
             <div class="input-login">
                 <input type="password" placeholder="Senha" id="campoSenha">
+                <div class="error" id="campoSenhaErro">Usuário ou senha incorreto.</div>
             </div>
 
+            
             <div class="rememberForgot">
                 <label>
                     <input type="checkbox">
@@ -24,6 +27,7 @@
                 </label>
                 <a href="#">Esqueci a senha</a>
             </div> 
+            
 
             <button type="submit" class="btnLogin" id="btnLogin">Acessar</button>
 
@@ -33,6 +37,6 @@
 
         </form>
     </main>
-    <script src="scripts/index.js"></script>
+    <script src="scripts/login.js"></script>
 </body>
 </html>
