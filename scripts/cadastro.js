@@ -2,6 +2,7 @@ const cadastroFormulario = document.getElementById('cadastroFormulario');
 const campoUsuario = document.getElementById('campoUsuario');
 const campoSenha = document.getElementById('campoSenha');
 const campoSenhaConfirmar = document.getElementById('campoSenhaConfirmar');
+const campoEmail = document.getElementById('campoEmail');
 
 
 cadastroFormulario.addEventListener('submit', (evento) => {
@@ -28,6 +29,17 @@ function processoCadastro()
         {
             teveErro('campoUsuarioErro', false);
         }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+	if ( !emailRegex.test(campoEmail.value.trim())) {
+		teveErro('campoEmailErro', true);
+		valido = false;
+	}
+
+	else {
+		teveErro('campoEmailErro', false);
+	}
 
     if (campoSenha.value.trim().length < 6) 
         {

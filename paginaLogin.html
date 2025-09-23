@@ -11,28 +11,28 @@
         <form id="formularioLogin">
             <h1>Login</h1>
             <div class="input-login">
-                <input type="text" placeholder="Usúario" id="campoUsuario">
+                <input type="text" placeholder="Usúario" id="campoUsuario" autocomplete="off">
                 <div class="error" id="campoUsuarioErro">Usuário ou senha incorreto.</div>
             </div>
             <div class="input-login">
-                <input type="password" placeholder="Senha" id="campoSenha">
+                <input type="password" placeholder="Senha" id="campoSenha" autocomplete="off">
                 <div class="error" id="campoSenhaErro">Usuário ou senha incorreto.</div>
             </div>
 
             
             <div class="rememberForgot">
                 <label>
-                    <input type="checkbox">
+                    <input type="checkbox" id="lembrarSenha">
                     Lembrar senha
                 </label>
-                <a href="#">Esqueci a senha</a>
+                <a href="paginaEsqueceuSenha.html">Esqueci a senha</a>
             </div> 
             
 
             <button type="submit" class="btnLogin" id="btnLogin">Acessar</button>
 
             <div class="linkRegistro">
-                <p>Não possui uma conta? <a target="_blank" href="paginaCadastro.html">Cadastre-se</a></p>
+                <p>Ainda não possui uma conta? <a  href="paginaCadastro.html">Cadastre-se</a></p>
             </div>
 
         </form>

@@ -24,20 +24,32 @@ body
     background-color: #d7d2cc;
     border-radius: 10px;
     color: rgb(0, 0, 0);
-    padding: 30px 50px;
+    padding: 2px 50px;
     box-shadow: 0 0 10px rgb(0, 0, 0, .2);
     background-color: blur(50px);
 }
 
-.container h1 
+h1 
 {
+    position: relative;
     text-align: center;
-    margin-bottom: 10px;
+    padding-top: 5px;
+    margin-bottom: 5px;
+}
+
+#btnBack
+{
+    position: relative;
+    bottom: 39px;
+    right: 35px;
+    cursor: pointer;  
 }
 
 .input-valor
 {
+    position: relative;
     font-weight: 600;
+    bottom: 20px;
 }
 
 .input-valor input
@@ -49,6 +61,7 @@ body
     font-size: 12px;    
     border-radius: 0;
     outline: none;
+    margin-bottom: 15px;
 }
 
 .input-valor button

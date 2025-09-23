@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/stylePrincipal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>PRINCIPAL</title>
 </head>
 <body>
     <main class="container">
         <form id="formularioLimite">
             <h1>Principal</h1>
+            
+            <i class="fa fa-angle-left" style="font-size:30px" id="btnBack"></i>
+
             <div class="input-valor">
                 <label>
                  Limite <br>
@@ -18,32 +22,14 @@
                 </label>
             </div>
             
-            <!--
             <div class="input-valor">
                 <label>
-                 Salário <br> 
-                <input type="number" min="0" placeholder="Insira o salário" id="campoSalario">
-                <button></button>
-                </label>
-            </div>
-            -->
-
-            <div class="input-valor">
-                <label>
-                 Gastos <br>
-                <!--<select name="opcaoProduto" id="opcaoProduto">
-                    <option value="roupa">Roupa</option>
-                    <option value="comida">Comida</option>
-                </select> -->
+                 Gasto <br>
                 <input type="number" min="0" placeholder="Insira o gasto" id="campoGasto">
                 <button></button>
                 </label>
             </div>
             
-            <!--
-            <button type="submit" class="btnLogin" id="btnLogin">Confirmar</button>
-            -->
-
         </form>
     </main>
     <script src="scripts/principal.js"></script>
