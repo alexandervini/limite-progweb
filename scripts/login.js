@@ -17,7 +17,7 @@ function processoCadastro()
 {
     let valido = true;
     
-    if (campoUsuario.value.trim().length < 5) 
+    if (campoUsuario.value != 'loginprog') 
         {
             teveErro('campoUsuarioErro', true);
             valido = false;
@@ -27,7 +27,7 @@ function processoCadastro()
             teveErro('campoUsuarioErro', false);
         }
 
-    if (campoSenha.value.trim().length < 6) 
+    if (campoSenha.value != 'prog1234') 
         {
             teveErro('campoSenhaErro', true);
             valido = false;

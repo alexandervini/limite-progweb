@@ -7,7 +7,7 @@ btnBack.addEventListener("click", (evento) => {
     window.open('paginaLogin.html', '_self');
 })
 
-/*
+
 formularioLimite.addEventListener('submit', (evento) => {
     evento.preventDefault();
     inserido();
@@ -20,4 +20,3 @@ function inserido()
     valor
     return valorLimite;
 }
-*/
