@@ -9,20 +9,25 @@ const pool = new Pool({
   password: '25052003',
 });
 
-// GET - Buscar todos os registros
+// GET - Obter todos os registros e o valor total
 export async function GET() {
   try {
-    const result = await pool.query(`
-      SELECT * FROM registros
-      ORDER BY id DESC
-    `);
-    return NextResponse.json(result.rows);
+    // Consulta para obter todos os registros
+    const registrosResult = await pool.query('SELECT id, tipo, valor, criado_em FROM registros ORDER BY criado_em DESC');
+    const registros = registrosResult.rows;
+
+    // Consulta para calcular o valor total
+    const totalResult = await pool.query('SELECT SUM(valor) AS total FROM registros');
+    const valorTotal = totalResult.rows[0].total || '0.00'; // Garante que seja '0.00' se não houver registros
+
+    // Retorna os registros e o valor total
+    return NextResponse.json({ registros, valorTotal });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
 
-// POST - Criar novo registro
+// POST - Criar um novo registro
 export async function POST(request) {
   try {
     const { tipo, valor } = await request.json();

@@ -11,9 +11,8 @@ const pool = new Pool({
 
 // PUT - Atualizar um registro existente
 export async function PUT(request, { params }) {
-  const { id } = await params;
-  
   try {
+    const { id } = await params; // IMPORTANTE: await params
     const { tipo, valor } = await request.json();
 
     if (!tipo || !valor) {
@@ -34,15 +33,16 @@ export async function PUT(request, { params }) {
 
     return NextResponse.json(result.rows[0]);
   } catch (error) {
+    console.error('Erro no PUT:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
 
 // DELETE - Deletar um registro
 export async function DELETE(request, { params }) {
-  const { id } = await params;
-  
   try {
+    const { id } = await params; // IMPORTANTE: await params
+    
     const result = await pool.query('DELETE FROM registros WHERE id = $1 RETURNING *', [id]);
 
     if (result.rows.length === 0) {
@@ -51,6 +51,7 @@ export async function DELETE(request, { params }) {
 
     return NextResponse.json({ message: 'Registro deletado com sucesso' });
   } catch (error) {
+    console.error('Erro no DELETE:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

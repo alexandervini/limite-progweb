@@ -12,6 +12,7 @@ export default function PrincipalPage() {
   const [modalAberto, setModalAberto] = useState(false);
   const [loading, setLoading] = useState(false);
   const [busca, setBusca] = useState('');
+  const [valorTotal, setValorTotal] = useState('0.00');
   const router = useRouter();
 
   useEffect(() => {
@@ -21,8 +22,9 @@ export default function PrincipalPage() {
   const carregarRegistros = async () => {
     try {
       const res = await fetch('/api/registros');
-      const data = await res.json();
-      setRegistros(data);
+      const { registros, valorTotal } = await res.json();
+      setRegistros(registros);
+      setValorTotal(valorTotal);
     } catch (error) {
       alert('Erro ao carregar registros: ' + error.message);
     }
@@ -33,7 +35,7 @@ export default function PrincipalPage() {
     setLoading(true);
 
     try {
-      const url = editando ? `/api/registros/${editando}` : '/api/registros';
+      const url = editando ? `/api/registros/${editando}` : '/api/registros'; // Removido String()
       const method = editando ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -70,10 +72,13 @@ export default function PrincipalPage() {
     if (!confirm('Tem certeza que deseja deletar?')) return;
 
     try {
-      const res = await fetch(`/api/registros/${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/registros/${id}`, { method: 'DELETE' }); // Removido String()
       if (res.ok) {
         alert('Registro deletado!');
         carregarRegistros();
+      } else {
+        const error = await res.json();
+        alert('Erro ao deletar: ' + error.error);
       }
     } catch (error) {
       alert('Erro ao deletar: ' + error.message);
@@ -107,6 +112,14 @@ export default function PrincipalPage() {
 
       <div className="flex-grow">
         <div className="max-w-6xl mx-auto">
+          {/* Card de Valor Total */}
+          <div className="bg-white rounded-lg shadow-lg p-4 mb-[-10]">
+            <h2 className="text-xl font-semibold text-[#1e1e2f] mb-2">Valor total</h2>
+            <p className="text-3xl font-bold text-[#1e1e2f]">
+              R$ {parseFloat(valorTotal).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </p>
+          </div>
+
           {/* Barra de Busca e Botão Novo */}
           <div className="bg-white rounded-lg shadow-lg p-4 mb-6">
             <div className="flex gap-4 items-center">
@@ -143,7 +156,7 @@ export default function PrincipalPage() {
                 </thead>
                 <tbody>
                   {registros
-                    .filter(reg => reg.tipo.toLowerCase().includes(busca.toLowerCase()))
+                    .filter(reg => reg.tipo.toLowerCase().startsWith(busca.toLowerCase()))
                     .length === 0 ? (
                     <tr>
                       <td colSpan="3" className="px-4 py-8 text-center text-gray-500">
@@ -152,7 +165,7 @@ export default function PrincipalPage() {
                     </tr>
                   ) : (
                     registros
-                      .filter(reg => reg.tipo.toLowerCase().includes(busca.toLowerCase()))
+                      .filter(reg => reg.tipo.toLowerCase().startsWith(busca.toLowerCase()))
                       .map((registro, index) => (
                         <tr key={registro.id} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                           <td className="px-4 py-3">
@@ -162,19 +175,19 @@ export default function PrincipalPage() {
                                 className="text-blue-600 hover:text-blue-800 px-3 py-1 rounded transition text-sm cursor-pointer"
                                 title="Editar"
                               >
-                                <img src="lapis.png" alt="Editar" className="w-4 h-4"></img>
+                                <img src="lapis.png" alt="Editar" className="w-4 h-4" />
                               </button>
                               <button
                                 onClick={() => handleDeletar(registro.id)}
                                 className="text-red-600 hover:text-red-800 px-3 py-1 rounded transition text-sm cursor-pointer"
                                 title="Deletar"
                               >
-                                <img src="lixo.png" alt="Editar" className="w-4 h-4"></img>
+                                <img src="lixo.png" alt="Deletar" className="w-4 h-4" />
                               </button>
                             </div>
                           </td>
                           <td className="px-4 py-3 text-gray-700">{registro.tipo}</td>
-                          <td className="px-4 py-3 text-gray-700">{registro.valor}</td>
+                          <td className="px-4 py-3 text-gray-700">R$ {parseFloat(registro.valor).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
                         </tr>
                       ))
                   )}
@@ -206,7 +219,7 @@ export default function PrincipalPage() {
                 {/* Tipo */}
                 <div>
                   <label className="block text-sm font-medium text-gray-800 mb-1">
-                    Tipo *
+                    Tipo
                   </label>
                   <input 
                     type="text"
@@ -221,7 +234,7 @@ export default function PrincipalPage() {
                 {/* Valor */}
                 <div>
                   <label className="block text-sm font-medium text-gray-800 mb-1">
-                    Valor *
+                    Valor
                   </label>
                   <input
                     type="number"
