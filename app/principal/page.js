@@ -205,7 +205,7 @@ export default function PrincipalPage() {
               <div className="grid grid-cols-1 gap-4">
                 {/* Tipo */}
                 <div>
-                  <label className="block text-sm font-medium text-gra  y-800 mb-1">
+                  <label className="block text-sm font-medium text-gray-800 mb-1">
                     Tipo *
                   </label>
                   <input 
